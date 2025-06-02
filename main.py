@@ -5,18 +5,20 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
-pokemones = pd.read_csv("smogon.csv")
-
+data = pd.read_csv('smogon.csv')
 vector = CountVectorizer()
+x = vector.fit_transform(data['texto'])
+header = (sorted(vector.vocabulary_))
+tabla = pd.DataFrame(data=x.toarray(),columns=header)
+km = KMeans(n_clusters=20,random_state=98)
+cluster = km.fit_predict(tabla)
+tabla["clusters"] = cluster
+print(tabla)
+#tbf = pd.DataFrame(data=x.toarray(), columns=cabecera)
 
-x=vector.fit_transform(pokemones["texto"])
-cabecera = sorted(vector.vocabulary_)
+#km = KMeans(n_clusters=20, random_state=98)
 
-tbf = pd.DataFrame(data=x.toarray(), columns=cabecera)
+#lista_clusters = km.fit_predict(tbf)
+#tbf["Cluster"] = lista_clusters
 
-km = KMeans(n_clusters=20, random_state=98)
-
-lista_clusters = km.fit_predict(tbf)
-tbf["Cluster"] = lista_clusters
-
-tbf.to_csv("tfid_smogon.csv")
+#tbf.to_csv("tfid_smogon.csv")
