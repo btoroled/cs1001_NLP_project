@@ -18,7 +18,7 @@ header = (sorted(vector.vocabulary_))
 tabla = pd.DataFrame(data=x.toarray(),columns=header)
 
 #Clustering con KMeans 
-km = KMeans(n_clusters=20,random_state=98)
+km = KMeans(n_clusters=18,random_state=98)
 cluster = km.fit_predict(tabla)
 tabla["clusters"] = cluster
 
@@ -29,11 +29,3 @@ print(header)
 pokemones_movelist = pd.concat([data["Pokemon"], tabla[types],tabla["clusters"]], axis=1)
 
 pokemones_movelist.to_csv("tfid_smogon.csv", index=False)
-
-
-#################################
-
-#Pregunta 2
-
-#################################
-

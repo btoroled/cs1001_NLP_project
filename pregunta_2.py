@@ -5,7 +5,7 @@ from imports import *
 data = pd.read_csv('smogon.csv')
 #################################
 
-#Pregunta 1
+#Pregunta 2
 
 #################################
 
@@ -29,11 +29,3 @@ print(header)
 pokemones_movelist = pd.concat([data["Pokemon"], tabla[types],tabla["clusters"]], axis=1)
 
 pokemones_movelist.to_csv("tfid_smogon.csv", index=False)
-
-
-#################################
-
-#Pregunta 2
-
-#################################
-
