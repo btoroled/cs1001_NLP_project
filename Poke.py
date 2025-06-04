@@ -23,7 +23,7 @@ table["cluster"] = cluster
 table["Pokemon"] = data["Pokemon"]
 
 
-types = pd.read_csv("Pokemon.csv")
+types = pd.read_csv("Pokemon (1).csv")
 Fusion = pd.merge(table[["Pokemon","cluster"]],types[["Name","Type 1","Type 2"]],left_on="Pokemon",right_on="Name",how = "inner")
 Fusion = Fusion.dropna(subset=["Pokemon","cluster"])
 Fusion = Fusion[Fusion["Pokemon"]!=""]
