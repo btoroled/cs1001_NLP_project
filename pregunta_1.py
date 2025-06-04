@@ -26,7 +26,7 @@ fusion = fusion.drop(columns="Pokemon")
 fusion = fusion[fusion["Name"]!=""]
 fusion["cluster"]=fusion["cluster"].astype(int)
 
-fusion.to_csv("tfid_pregunta1.csv") #se realiza el csv del texto.
+fusion.to_csv("tabla_final_pregunta1.csv") #se realiza el csv del texto.
 
 #OUTPUT CONSOLA
 print("\nResumen de matriz TF-IDF: ")

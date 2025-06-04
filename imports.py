@@ -4,4 +4,4 @@ from sklearn.cluster import KMeans
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer    
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
+from sklearn.preprocessing import StandardScaler
