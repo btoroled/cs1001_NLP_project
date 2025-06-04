@@ -2,7 +2,7 @@
 from imports import *
 
 #Carga de CSV
-data = pd.read_csv('smogon.csv')
+data = pd.read_csv('csv/smogon.csv')
 #################################
 
 #Pregunta 2
@@ -11,14 +11,14 @@ data = pd.read_csv('smogon.csv')
 
 #TFID sobre la columna texto
 vector = TfidfVectorizer()
-x = vector.fit_transform(data['texto'])
+x = vector.fit_transform(data['moves'])
 
 #Creacion de Dataframe con los tokens ordenados
 header = (sorted(vector.vocabulary_))
 tabla = pd.DataFrame(data=x.toarray(),columns=header)
 
 #Clustering con KMeans 
-km = KMeans(n_clusters=20,random_state=98)
+km = KMeans(n_clusters=18,random_state=98)
 cluster = km.fit_predict(tabla)
 tabla["clusters"] = cluster
 
@@ -28,4 +28,4 @@ print(header)
 #Crear dataframe final 
 pokemones_movelist = pd.concat([data["Pokemon"], tabla[types],tabla["clusters"]], axis=1)
 
-pokemones_movelist.to_csv("tfid_smogon.csv", index=False)
+pokemones_movelist.to_csv("tfid_moveset.csv", index=False)
