@@ -20,7 +20,7 @@ table["Pokemon"] = data["Pokemon"] # se agrega la columna Pokemon
 
 #Realizando el merge
 types = pd.read_csv("csv/pokedex.csv") # Se utiliza la base de datos "pokedex.csv descargado de Kaggle"
-fusion = pd.merge(types[["Name","Type 1","Type 2"]], table[["Pokemon","cluster"]],left_on="Name",right_on="Pokemon",how = "inner") #Se realiza el merge base a las columnas puestas
+fusion = pd.merge(types[["Name","Type 1","Type 2"]], table[["Pokemon","cluster"]],left_on="Name",right_on="Pokemon",how = "inner") #Realizmos el merge en esta linea. Poniendo primero la lista de tipos y luego la tabla de smogon.csv. Creando asi una nueva tabla ordenada por numero en la pokedex.
 fusion = fusion.dropna(subset=["Pokemon","cluster"]) #se elimina las columnas que tienen datos faltantes
 fusion = fusion.drop(columns="Pokemon")
 fusion = fusion[fusion["Name"]!=""]
