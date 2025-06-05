@@ -42,3 +42,28 @@ print("\nLas claves del diccionario son: ")
 print(sorted(vector.vocabulary_.keys()))
 print("\nLa matriz de fercuencias: ")
 print(fusion)
+
+# Contar cuántas veces se repite cada tipo por cluster (Type 1)
+type1_counts = fusion.groupby("cluster")["Type 1"].value_counts().unstack(fill_value=0)
+
+# Contar cuántas veces se repite cada tipo por cluster (Type 2)
+type2_counts = fusion.groupby("cluster")["Type 2"].value_counts().unstack(fill_value=0)
+
+print("\nConteo de tipos (Type 1) por cluster:")
+print(type1_counts)
+
+print("\nConteo de tipos (Type 2) por cluster:")
+print(type2_counts)
+
+fusion_melted = pd.melt(fusion, id_vars=["cluster"], value_vars=["Type 1", "Type 2"], value_name="Type")
+type_total_counts = fusion_melted.groupby(["cluster", "Type"]).size().unstack(fill_value=0)
+
+type_total_counts["Total"] = type_total_counts.sum(axis=1)
+
+print("\nTotal de coincidencias de tipos por cluster:")
+print(type_total_counts["Total"])
+
+print("\nConteo total de tipos (Type 1 + Type 2) por cluster:")
+print(type_total_counts)
+# Guardar los conteos de tipos por cluster en un CSV
+type_total_counts.to_csv("conteo_tipos_por_cluster.csv")
