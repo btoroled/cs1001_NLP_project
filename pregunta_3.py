@@ -35,5 +35,22 @@ print(pca.explained_variance_ratio_) #Componentes de la varianza por separado
 print(sum(pca.explained_variance_ratio_)) #Varianza acumulada
 
 
+#TABLA - CLUSTERS
+
+df_tfidf = pd.read_csv('Fusion.csv')
+df_pca = pd.read_csv('MatrizGenerada(PCA-Cluster).csv')
+
+# Si es necesario, renombra las columnas para unificarlas
+df_tfidf.rename(columns={'Pokemon': 'Nombre'}, inplace=True)
+df_pca.rename(columns={'Pokemon': 'Nombre'}, inplace=True)
+
+# Unir ambos DataFrames por el nombre
+df_comparacion = pd.merge(df_tfidf[['Nombre', 'cluster']], df_pca[['Nombre', 'Clusters']], on='Nombre', how='inner')
+df_comparacion.rename(columns={'cluster': 'Cluster_TFIDF', 'Clusters': 'Cluster_PCA'}, inplace=True)
+
+tabla_comparacion = pd.crosstab(df_comparacion['Cluster_TFIDF'], df_comparacion['Cluster_PCA'])
+print(tabla_comparacion)
+
+
 
 
