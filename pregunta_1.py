@@ -91,3 +91,21 @@ print(max_types_df)
 
 # Guardar la tabla en un CSV si lo deseas
 max_types_df.to_csv("max_types_by_cluster_pregunta_1.csv", index=False)
+
+
+# Interpretacion de resultados
+print("\nInterpretación de resultados:")
+print("Los clusters representan grupos de Pokémon con movimientos similares. Cada cluster agrupa Pokémon que comparten estrategias de combate similares, lo que puede ser útil para entender cómo se desempeñan en batallas.")
+print("Los tipos más frecuentes en cada cluster indican qué tipos de Pokémon son más comunes en esos grupos. Esto puede ayudar a identificar tendencias en las estrategias de combate y a comprender mejor la diversidad de tipos en los equipos de Pokémon.")  
+print("El conteo de tipos por cluster muestra la distribución de tipos en cada grupo, lo que puede ser útil para identificar combinaciones de tipos populares y estrategias comunes entre los Pokémon.")
+print("El CSV generado contiene la tabla final con los Pokémon, sus tipos y los clusters a los que pertenecen, lo que facilita el análisis posterior.")
+print("El CSV 'conteo_tipos_por_cluster.csv' contiene el conteo de tipos por cluster, lo que permite analizar la diversidad de tipos en cada grupo.")
+print("El CSV 'max_types_by_cluster_pregunta_1.csv' contiene los tipos más frecuentes y sus conteos en cada cluster, lo que proporciona una visión clara de las tendencias de tipos en los grupos de Pokémon.")
+print("En las siguientes lineas mostraremos el porcentaje de cada tipo por cluster:")
+# Calcular el porcentaje de cada tipo por cluster
+type_percentage = type_total_counts.div(type_total_counts["Total"], axis=0) * 100
+print("\nPorcentaje de tipos por cluster:")
+print(type_percentage)
+# Guardar el porcentaje de tipos por cluster en un CSV
+type_percentage.to_csv("porcentaje_tipos_por_cluster.csv")
+print("\nEl CSV 'porcentaje_tipos_por_cluster.csv' contiene el porcentaje de cada tipo por cluster, lo que permite analizar la proporción de tipos en cada grupo de Pokémon.")
