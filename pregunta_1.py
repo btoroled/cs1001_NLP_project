@@ -67,3 +67,27 @@ print("\nConteo total de tipos (Type 1 + Type 2) por cluster:")
 print(type_total_counts)
 # Guardar los conteos de tipos por cluster en un CSV
 type_total_counts.to_csv("conteo_tipos_por_cluster.csv")
+
+# Obtener el tipo más frecuente y el segundo más frecuente por cluster
+result = []
+
+for cluster, row in type_total_counts.drop(columns="Total").iterrows():
+    top_types = row.nlargest(2)
+    max_type = top_types.index[0]
+    max_count = top_types.iloc[0]
+    second_type = top_types.index[1] if len(top_types) > 1 else None
+    second_count = top_types.iloc[1] if len(top_types) > 1 else None
+    result.append({
+        "Cluster": cluster,
+        "MAX_TYPE": max_type,
+        "Counter_MAX_TYPE": max_count,
+        "Second_MAX_TYPE": second_type,
+        "Counter_second_MAX_TYPE": second_count
+    })
+
+max_types_df = pd.DataFrame(result)
+print("\nTabla de tipos más frecuentes por cluster:")
+print(max_types_df)
+
+# Guardar la tabla en un CSV si lo deseas
+max_types_df.to_csv("max_types_by_cluster_pregunta_1.csv", index=False)
