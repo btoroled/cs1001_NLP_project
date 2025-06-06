@@ -39,17 +39,19 @@ print(sum(pca.explained_variance_ratio_)) #Varianza acumulada
 
 df_tfidf = pd.read_csv('Fusion.csv')
 df_pca = pd.read_csv('MatrizGenerada(PCA-Cluster).csv')
-
-# Si es necesario, renombra las columnas para unificarlas
+# Renombrar si es necesario
 df_tfidf.rename(columns={'Pokemon': 'Nombre'}, inplace=True)
-df_pca.rename(columns={'Pokemon': 'Nombre'}, inplace=True)
-
-# Unir ambos DataFrames por el nombre
+# Agregar columna 'Nombre' al df_pca si no está
+# Asumiremos que el índice de df_pca corresponde al orden del dataset original
+df_pca['Nombre'] = df_tfidf['Nombre']
+# Unir los dataframes por nombre de Pokémon
 df_comparacion = pd.merge(df_tfidf[['Nombre', 'cluster']], df_pca[['Nombre', 'Clusters']], on='Nombre', how='inner')
+# Renombrar columnas para claridad
 df_comparacion.rename(columns={'cluster': 'Cluster_TFIDF', 'Clusters': 'Cluster_PCA'}, inplace=True)
-
+# Tabla cruzada: cómo se distribuyen los clústeres
 tabla_comparacion = pd.crosstab(df_comparacion['Cluster_TFIDF'], df_comparacion['Cluster_PCA'])
 print(tabla_comparacion)
+
 
 
 
